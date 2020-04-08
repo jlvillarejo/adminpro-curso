@@ -7,6 +7,11 @@ import { APP_ROUTES } from './app.routes';
 // Módulos
 import { PagesModule } from './pages/pages.module';
 
+// Servicios
+// No es necesario proveer los servicios en el módulo a partir de la versión 7 de Angular
+
+
+// Componentes
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./login/register.component";
