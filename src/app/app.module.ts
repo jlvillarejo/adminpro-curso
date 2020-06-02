@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 // Rutas
 import { APP_ROUTES } from './app.routes';
@@ -9,6 +10,7 @@ import { PagesModule } from './pages/pages.module';
 
 // Servicios
 // No es necesario proveer los servicios en el módulo a partir de la versión 7 de Angular
+// import { ServiceModule } from './services/service.module';
 
 
 // Componentes
@@ -17,7 +19,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./login/register.component";
 
 // Temporal
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     PagesModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    // ServiceModule,
     APP_ROUTES
   ],
   providers: [],
