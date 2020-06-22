@@ -17,10 +17,10 @@ export class LoginGuardGuard implements CanActivate {
     // console.log('Paso por el loginGuard');
 
     if (this._usuarioService.autenticado()) {
-      console.log('Autenticado');
+      // console.log('Autenticado');
       return true;
     } else {
-      console.log('No autenticado');
+      // console.log('No autenticado');
       this.router.navigate(['/login']);
       return false;
     }

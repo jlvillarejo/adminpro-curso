@@ -7,6 +7,7 @@ import { URL_SERVICIOS } from '../../config/config';
 
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
+import { UploadFilesService } from '../upload-files/upload-files.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class UsuarioService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
+    public _uploadFile: UploadFilesService
   ) {
 
     this.cargarStorage();
@@ -67,6 +69,7 @@ export class UsuarioService {
 
     return this.http.post(url, { token })
       .pipe(map((resp: any) => {
+        console.log(resp);
         this.guardarStorage(resp.id, resp.token, resp.usuario);
         return true;
       }));
@@ -105,4 +108,37 @@ export class UsuarioService {
     );
 
   }
+
+  actualizarUsuario(usuarioIN: Usuario) {
+
+    let url = URL_SERVICIOS + '/user/' + usuarioIN._id;
+    url += '?token=' + this.token;
+
+    return this.http.put(url, usuarioIN)
+      .pipe(map((resp: any) => {
+        const userDB = resp.usuario;
+
+        this.guardarStorage(userDB._id, this.token, userDB);
+        swal('Usuario actualizado', userDB.nombre, 'success');
+
+        return true;
+      }));
+
+  }
+
+  cambiarImagen(file: File, id: string) {
+
+    this._uploadFile.uploadFile(file, 'usuarios', id)
+      .then((resp: any) => {
+        this.usuario.img = resp.usuario.img;
+        swal('Imagen actualizada', this.usuario.nombre, 'success');
+
+        this.guardarStorage(id, this.token, this.usuario);
+      })
+      .catch(resp => {
+        console.log(resp);
+        swal('Error al modificar la imagen', this.usuario.nombre, 'error');
+      });
+  }
+
 }

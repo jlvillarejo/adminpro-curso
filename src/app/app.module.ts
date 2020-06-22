@@ -21,6 +21,7 @@ import { RegisterComponent } from "./login/register.component";
 // Temporal
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
